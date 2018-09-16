@@ -46,7 +46,7 @@ def get_images(subreddit, limit):
     generates a list of image urls from 'hot' posts from passed in subreddit
     """
     image_urls = []
-    for submission in subreddit.top(limit=limit):
+    for submission in subreddit.hot(limit=limit):
         if '.gifv' in submission.url:
             #no gifs
             continue
@@ -58,8 +58,8 @@ def get_images(subreddit, limit):
             image_urls.append(submission.url)
         elif 'imgur.com/' in submission.url:
             imageHash = submission.url.split('/')[-1].split('?')[0] + '.jpg'
-            image_urls.append('i.imgur.com/' + imageHash)
-    #print(image_urls)
+            image_urls.append('http://i.imgur.com/' + imageHash)
+    print(image_urls)
     return image_urls
 
 
