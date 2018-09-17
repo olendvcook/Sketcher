@@ -2,7 +2,7 @@ import tkinter as tk
 from PIL import Image, ImageTk
 import threading
 
-class Gui(threading.Thread):
+class ImgGui(threading.Thread):
     """
     Gui class in a seperate thread
     """
