@@ -5,6 +5,7 @@ from ctrlgui import CtrlGui
 import praw
 import PIL
 import time
+import csv
 
 if __name__ == '__main__':
     print("World Hello")
@@ -12,12 +13,25 @@ if __name__ == '__main__':
     # Initialize reddit connection
     reddit = connect()
 
+    subs = []
+    multisub = ''
+    with open ('./resources/subs.txt', 'r') as input:
+        csv_reader = csv.reader(input, delimiter=',')
+        for row in csv_reader:
+            for sub in row:
+                multisub = multisub + sub + '+'
+        print(subs)
+    print(multisub)
+
+
+    
     # pull a subreddit
     # Note: possible to do a multireddit
-    sub = reddit.subreddit('supermodelcats')
-
+    
+    #sub = reddit.subreddit('supermodelcats')
+    sub = reddit.subreddit(multisub)
     # pull "limit" number of posts and then get the image urls
-    img_urls = get_images(sub, 100)
+    img_urls = get_images(sub, 900)
 
     #initialize gui
     img_gui = ImgGui()
@@ -26,7 +40,7 @@ if __name__ == '__main__':
 
     while (img_gui.running and ctrl.running):
         # We can get exception if we close window before calling the next few lines
-
+    
         """
         img = grab_rdm_img(img_urls)
 
@@ -34,3 +48,4 @@ if __name__ == '__main__':
 
         time.sleep(5)
         """
+
